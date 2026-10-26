@@ -48,6 +48,8 @@ Et la règle d'or du jour : **la liste se charge une seule fois, dans le service
 
 ## Le socle : étapes 1 à 6
 
+Chaque étape montre une capture de la correction : ta mise en page peut en différer, compare le contenu affiché.
+
 ### Étape 1 · Créer l'app
 
 Dans ton dossier de formation :
@@ -61,6 +63,8 @@ Aux questions du terminal, réponds comme au cours : `CSS`, et `N` pour le rendu
 Puis vide `app.html` : la page de démo d'Angular laisse la place à un en-tête avec le titre « Annuaire », et à `<router-outlet />` juste en dessous. Lance `ng serve`.
 
 **Ce que tu dois voir :** sur `http://localhost:4200`, le titre « Annuaire », et plus rien de la page d'Angular.
+
+![Un bandeau bleu foncé avec le titre « Annuaire » en blanc, et une page vide en dessous.](screenshots/step-1.png)
 
 <details>
 <summary>Un indice</summary>
@@ -88,6 +92,8 @@ Pour vérifier, affiche le nombre de personnes sous le titre, dans `app.html`.
 Et pense à copier `people-backup.json` dans `public/` maintenant : le jour où l'API tombe, tu seras content de l'avoir.
 
 **Ce que tu dois voir :** « 30 personnes » sous le titre. Dans l'onglet Réseau des outils de développement, **une seule** requête vers `randomuser.me`.
+
+![Le bandeau « Annuaire », avec la ligne « 30 personnes » sous le titre, et une page encore vide.](screenshots/step-2.png)
 
 <details>
 <summary>Un indice</summary>
@@ -117,6 +123,10 @@ Pendant le chargement, la page affiche « Chargement de l'annuaire… ». Si l'a
 | Onglet Réseau en « Slow 4G », puis recharge                  | « Chargement de l'annuaire… », puis les cartes           |
 | Dans le service, `randomuser.me` devient `randomuser.mee`    | Le message d'erreur, et aucune carte (remets l'adresse !) |
 
+![Une grille de cartes blanches : photo ronde, prénom et nom en gras, ville en dessous. La première est Logan Fleury, Aubervilliers.](screenshots/step-3.png)
+
+![Pendant le chargement : « 0 personnes » sous le titre, et le texte « Chargement de l'annuaire… » à la place des cartes.](screenshots/step-3-loading.png)
+
 <details>
 <summary>Un indice</summary>
 
@@ -135,6 +145,8 @@ Piège : randomuser.me n'a **pas** d'adresse pour une seule personne. Pas de nou
 | Retour, puis un clic sur une autre carte        | Sa fiche, et aucune nouvelle requête vers `randomuser.me` dans l'onglet Réseau |
 | F5 sur une fiche                                | La fiche revient, après « Chargement de l'annuaire… »                         |
 | `http://localhost:4200/personnes/n-existe-pas`  | « Personne introuvable »                                                      |
+
+![La fiche d'Eléonore Legrand : le lien « ← Retour à l'annuaire », sa photo, puis Âge 73 ans, Email eleonore.legrand@example.com, Téléphone 05-01-64-28-36, Portable 06-45-61-45-74, Ville Orléans, France.](screenshots/step-4.png)
 
 <details>
 <summary>Un indice</summary>
@@ -158,6 +170,8 @@ La liste affichée se **calcule**, à partir de la liste complète et du texte t
 | `benjamin f`  | 1 carte : Benjamin Fabre                               |
 | `xyz`         | « Aucune personne ne correspond à ta recherche. »      |
 | Champ vidé    | Les 30 cartes reviennent                               |
+
+![Le champ « Rechercher » contient « ben », et il ne reste que deux cartes : Benjamin Fabre (Toulouse) et Benjamin Riviere (Perpignan).](screenshots/step-5.png)
 
 <details>
 <summary>Un indice</summary>
@@ -183,6 +197,10 @@ Une page `/favoris` affiche les mêmes cartes, mais seulement les favoris. Dans 
 | Application › Local Storage                                | Une clé `favorites`, avec un tableau d'uuid                     |
 | Étoile sur Ethan Clement trouvé par `ethan`, puis champ vidé | Son étoile est toujours pleine                                |
 
+![La liste avec une étoile en haut à droite de chaque carte : pleine pour Louane Adam et Kenzo Marie, vide pour les autres. Dans le bandeau, les liens « Annuaire » et « Favoris (2) ».](screenshots/step-6.png)
+
+![La page « Mes favoris » : seulement les cartes de Louane Adam et Kenzo Marie, toutes les deux avec l'étoile pleine.](screenshots/step-6-favorites.png)
+
 <details>
 <summary>Un indice</summary>
 
@@ -207,6 +225,8 @@ Le socle tourne ? Choisis ceux qui te tentent, dans l'ordre que tu veux.
 | Deux clics sur « Suivant »               | « Page 3 / 3 », « Suivant » désactivé              |
 | `ben` tapé depuis la page 3              | « Page 1 / 1 » et les deux Benjamin                |
 
+![La troisième page : les 10 dernières cartes, d'Elliot Menard à Benjamin Riviere, et en bas « Précédent », « Page 3 / 3 » et « Suivant » grisé.](screenshots/bonus-pagination.png)
+
 <details>
 <summary>Un indice</summary>
 
@@ -223,6 +243,8 @@ Une liste déroulante « Tous / Femmes / Hommes », qui se combine avec la reche
 | Hommes                    | 18 personnes                                          |
 | Hommes, et `ben` tapé     | Les deux Benjamin                                     |
 | Femmes, et `ben` tapé     | « Aucune personne ne correspond à ta recherche. »     |
+
+![« ben » dans la recherche et « Hommes » dans la liste Genre : les deux cartes Benjamin Fabre et Benjamin Riviere, et « Page 1 / 1 ».](screenshots/bonus-gender.png)
 
 <details>
 <summary>Un indice</summary>
@@ -242,6 +264,10 @@ Une fois envoyé, le contact s'ajoute en tête de l'annuaire, et tu arrives sur 
 | Prénom `A`, email `pas-un-email`           | « 2 caractères au moins. », et l'email refusé                 |
 | Un contact valide                          | Sa fiche s'ouvre, « 31 personnes », sa carte en premier       |
 | F5                                         | Il a disparu : « 30 personnes »                               |
+
+![Le formulaire « Ajouter un contact » envoyé vide : un message rouge sous Prénom, Nom, Âge, Email et Ville, rien sous Genre ni sous Téléphone.](screenshots/bonus-add-contact-errors.png)
+
+![Retour à l'annuaire après l'ajout : « 31 personnes » sous le titre, et la carte d'Alice Martin, Tours, en premier, avec une tête de Lego comme photo.](screenshots/bonus-add-contact.png)
 
 La dernière ligne est normale : randomuser.me n'enregistre rien, et ton contact ne vit que dans le signal du service, le temps que la page reste ouverte.
 
