@@ -11,7 +11,7 @@ Ce dépôt te donne deux choses : ce README, et `people-backup.json`, la roue de
 Clone-le sous le nom `annuaire-sujet` :
 
 ```bash
-git clone <l'adresse donnée par ton formateur> annuaire-sujet
+git clone https://github.com/peacepilou/annuaire.git annuaire-sujet
 ```
 
 Ton app, tu la crées **à côté** de ce dossier, pas dedans. Tu te souviens pourquoi ? Dans un dossier déjà suivi par Git, `ng new` saute la création du dépôt.
